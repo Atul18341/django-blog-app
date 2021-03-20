@@ -15,9 +15,10 @@
 </nav>
 {% block content %}
   {% for blog in blogs %}
-    
-<img src="{{ blog.image.url }}" alt="blog"><br>
+<div>
+<img src="{{ blog.image.url }}" width="300px" height="200px"><br>
      {{blog.content}}
+</div>
      {% endfor %}
 {% endblock %}
 </body>
