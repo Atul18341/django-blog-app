@@ -4,10 +4,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Hello World</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">Atul Blog</a>
+  
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-secondary" type="submit">Login</button>
+      <button class="btn btn-secondary" type="submit">Signup</button>
+    </form>
+  </div>
+</nav>
 {% block content %}
   {% for blog in blogs %}
-     <h3>{{blog.post}}</h3>
+    
+<img src="{{ blog.image.url }}" alt="blog"><br>
+     {{blog.content}}
      {% endfor %}
 {% endblock %}
 </body>
