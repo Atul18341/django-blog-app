@@ -33,6 +33,11 @@ def login(request):
 def signup(request):
     if request.method=="post":
       form=RegisterForm(request.POST)
-      
+      if form.is_valid():
+        user=form.save()
+        login(request,user)
+        messages.success(request, "Registration Successful.")
+        return redirect(" ")
+      messages.error(request, "Unsuccessful registration. Invalid information.")
     form=RegisterForm
     return render(request,"signup.html",{'register_form':form})

@@ -5,13 +5,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="row">
+<div class="col-md-10">
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand" href="#">Atul Blog</a>
-  
+  <a class="navbar-brand" href="#">Atul Blog</a></div>
+    
+     <div clas="col-md-1" style="padding-right:10px">
     <form class="form-inline my-2 my-lg-0">
       <a class="btn btn-secondary" href="{% url 'Login' %}"type="submit">Login</a>
+     </div>
+     <div clas="col-md-1">
       <a class="btn btn-secondary" href="{% url 'SignUp' %}"type="submit">Signup</a>
     </form>
+     </div>
   </div>
 </nav>
 </head>
