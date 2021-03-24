@@ -2,16 +2,23 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-class RegisterForm(UserCreationForm):
-   email=forms.EmailField(required=True)
+gender_options=(("1","None"),("2","Male"),("3","Female"),("4","Others"))
 
+class NewUserForm(UserCreationForm):
+   name=forms.CharField(required=True)
+   email=forms.EmailField(required=True)
+   age=forms.CharField(required=True)
+   gender=forms.ChoiceField(choices=gender_options)
    class Meta:
      model=User
-     fields=("username","email","password1","password2")
+     fields=("name","username","email","password1","password2","age","gender")
 
    def save(self, commit=True):
-    user=super(RegisterForm, self).save(commit=False)
-    user.email=self.cleaned_data['email']
-    if commit:
-      user.save()
-    return user
+       user=super(NewUserForm, self).save(commit=False)
+       user.name=self.cleaned_data['name']
+       user.email=self.cleaned_data['email']
+       user.age=self.cleaned_data['age']
+       user.gender=self.cleaned_data['gender']
+       if commit:
+         user.save()
+       return user

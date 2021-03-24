@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import blog
-from .forms import RegisterForm
+from .forms import NewUserForm
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,32 +12,32 @@ def blogs(request):
     blogs=blog.objects.all()
     return render(request,"index.html",{'blogs':blogs})
 
-def login(request):
-    if request.method=="post":
-      form=AuthenticationForm(request.POST)
+def user_login(request):
+    if request.method=="POST":
+      form=AuthenticationForm(request,request.POST)
       if form.is_valid():
         username=form.cleaned_data.get('username')
         password=form.cleaned_data.get('password')
-        user=authenticate(username,password)
+        user=authenticate(username=username,password=password)
         if user is not None:
-          login(request,user)
+          login(request, user)
           messages.info(request, f"You are now logged in as:{username}.")
-          return redirect("index.html")
+          return redirect("Blog")
         else:
            messages.error(request,"Invalid username or password.")
       else:
-          messages.error(request,"Invalid usename or password.")
-    form=AuthenticationForm
+          messages.error(request,"Invalid usename or password.Correct it")
+    form=AuthenticationForm()
     return render(request,"login.html",{'login_form':form})
 
 def signup(request):
-    if request.method=="post":
-      form=RegisterForm(request.POST)
+    if request.method=="POST":
+      form=NewUserForm(request.POST)
       if form.is_valid():
         user=form.save()
-        login(request,user)
+        login(request, user)
         messages.success(request, "Registration Successful.")
-        return redirect(" ")
+        return redirect("Login")
       messages.error(request, "Unsuccessful registration. Invalid information.")
-    form=RegisterForm
+    form=NewUserForm
     return render(request,"signup.html",{'register_form':form})
