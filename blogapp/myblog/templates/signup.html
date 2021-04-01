@@ -11,6 +11,7 @@
    <h1 class="text-center"> Register Yourself</h1>
      <form class="signup" method="POST">
       {% csrf_token %}
+
       {{ register_form|crispy }}
       <button class="btn btn-primary" type="submit">Register</button>
      </form>
